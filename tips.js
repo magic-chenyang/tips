@@ -11,16 +11,10 @@
 		this.defaults = {
 			post: "bottomRight" , 		//位置 四个角  topLeft,topRight,bottomLeft,bottomRight
             gurl: "#" ,           		//跳转链接,非空是gword也不能为空
-            gword: "",			   		//加链接文字，只有在添加了广告链接时有效果
+            gword: "",			   		//消息详情
             status: "info" ,    		//状态，succeed,error,info,warm
             close: 0 ,             		//自动关闭时间，为0时不自动关闭，单位为秒
-            anitime:"500" ,				//关闭动画时间
-            title:"提示" ,				//tips标题
-            content:"操作成功" ,		//消息标题
-            detail:"你的操作已成功" ,	//消息详情
-            height:200,					//消息框高
-            width:360,					//消息框宽
-            remark:"",					//备注信息
+            anitime:"100" ,				//关闭动画时间
             cbtype:"",					//触发回调的方式，auto、click、all、空,空不调用
             cbfun:function(){}			//关闭后回调
 		},
@@ -33,18 +27,11 @@
 			var idx = tipsData['tipsIndex'] ;
 			var b  = '' , c = '' ;
 			b += '<input type="hidden" id="tipsHide_'+ idx +'" value="'+ self.options.remark +'"/>'
-            b += '<div id="tipsBox_'+ idx +'" class="bottom-message-notice" style="height:'+ self.options.height +'px;width:'+self.options.width+'px;"><h2>' + self.options.title + '<span class="mes_prompt_close" id="tipsClose_'+ idx +'"></span></h2>' ; 
-            if('succeed' == self.options.status)  c = 'notice_succeed' ;
-            else if('error' == self.options.status)  c = 'notice_error' ;
-            else if('warm' == self.options.status) c = 'notice_warm' ;
-            else c = 'notice_info' ;
-            b += '<div  class="mess-notice-con"><p><span class="bottom-bounced-notice '+ c +'"></span><span><b>' + self.options.content + '</b></span></p>' ;
+            b += '<div id="tipsBox_'+ idx +'" class="bottom-message-notice" style="height:'+ self.options.height +'px;width:'+self.options.width+'px;"><span class="mes_prompt_close" id="tipsClose_'+ idx +'"></span>' ; 
+            b += '<div  class="mess-notice-con">' ;
             //无链接
-            if("#"==self.options.gurl)
-            	b += '<p><label>'+ self.options.detail +'</label></p>' ;
-            else
-            	b += '<p><label>'+ self.options.detail + '<a href="' + self.options.gurl+ '">'+ self.options.gword + '</a>' +'</label></p></div></div>' ;
-            
+        	b += '<p><label>'+ self.options.gword +'</label></p>' ;
+
             $(self.element).append(b) ;
 
             tipsData["tipsContent"].push(b) ;
